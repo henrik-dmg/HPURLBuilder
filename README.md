@@ -1,10 +1,16 @@
-# URLBuilder
+# HPURLBuilder
 
 A library to construct URLs with an elegant, SwiftUI-like syntax.
 
 ## Installation
 
+### SPM
+
 Either add `.package(url: "https://github.com/henrik-dmg/URLBuilder", from: "1.0.0")` to your `Package.swift` file or add a new Swift package from the Xcode project navigator
+
+### CocoaPods
+
+Add `pod 'HPURLBuilder` to your `Podfile` and run `pod install`
 
 ## Usage
 

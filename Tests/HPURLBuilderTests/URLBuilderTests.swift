@@ -1,4 +1,4 @@
-@testable import URLBuilder
+@testable import HPURLBuilder
 import XCTest
 
 class URLQueryItemBuilderTests: XCTestCase {
