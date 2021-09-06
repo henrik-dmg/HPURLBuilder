@@ -4,7 +4,7 @@ import XCTest
 class URLQueryItemBuilderTests: XCTestCase {
 
 	func testURL() {
-		let url = URLBuilder.build {
+		let url = URL.build {
 			Host("api.openweathermap.org")
 			PathComponent("data")
 			PathComponent("2.5")
@@ -20,9 +20,9 @@ class URLQueryItemBuilderTests: XCTestCase {
 
 	func testNilArrayItem() {
 		let numbers: [Int]? = [1, 61, 34, 89]
-		let url = URLBuilder.build {
+		let url = URL.build {
 			Host("panhans.dev")
-			QueryItem(name: "test", value: numbers)
+			QueryItem(name: "test", values: numbers)
 		}
 
 		XCTAssertEqual(url?.absoluteString, "https://panhans.dev?test=1,61,34,89")
@@ -30,9 +30,9 @@ class URLQueryItemBuilderTests: XCTestCase {
 
 	func testArrayNilItems() throws {
 		let numbers: [Int?] = [1, 34, nil, 89, nil]
-		let url = try URLBuilder.buildThrowing {
+		let url = try URL.buildThrowing {
 			Host("panhans.dev")
-			QueryItem(name: "test", value: numbers)
+			QueryItem(name: "test", values: numbers)
 		}
 
 		XCTAssertEqual(url.absoluteString, "https://panhans.dev?test=1,34,89")
@@ -40,16 +40,16 @@ class URLQueryItemBuilderTests: XCTestCase {
 
 	func testNilArrayNilItems() throws {
 		let numbers: [Int?]? = [9, 34, nil, 56, nil]
-		let url = try URLBuilder.buildThrowing {
+		let url = try URL.buildThrowing {
 			Host("panhans.dev")
-			QueryItem(name: "test", value: numbers)
+			QueryItem(name: "test", values: numbers)
 		}
 
 		XCTAssertEqual(url.absoluteString, "https://panhans.dev?test=9,34,56")
 	}
 
 	func testURLEncoding() throws {
-		let url = try URLBuilder.buildThrowing {
+		let url = try URL.buildThrowing {
 			Host("panhans.dev")
 			QueryItem(name: "test", value: "some string with spaces")
 		}

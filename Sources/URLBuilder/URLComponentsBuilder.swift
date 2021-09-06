@@ -1,48 +1,30 @@
 import Foundation
 
+/// A result builder that can be used to provide `URLComponentsModifier`
 @resultBuilder public struct URLComponentsBuilder {
 
-	public static func buildBlock(_ components: URLBuildable?...) -> [URLBuildable?] {
+	public static func buildBlock(_ components: URLComponentsModifier?...) -> [URLComponentsModifier?] {
 		components
 	}
 
-	public static func buildEither(first component: [URLBuildable?]?) -> [URLBuildable?] {
+	public static func buildEither(first component: [URLComponentsModifier?]?) -> [URLComponentsModifier?] {
 		component ?? []
 	}
 
-	public static func buildEither(second component: [URLBuildable?]?) -> [URLBuildable?] {
+	public static func buildEither(second component: [URLComponentsModifier?]?) -> [URLComponentsModifier?] {
 		component ?? []
 	}
 
-	public static func buildOptional(_ component: [URLBuildable?]?) -> [URLBuildable?] {
+	public static func buildOptional(_ component: [URLComponentsModifier?]?) -> [URLComponentsModifier?] {
 		component ?? []
 	}
 
-	public static func buildArray(_ components: [[URLBuildable?]]) -> [URLBuildable?] {
-		components.reduce([URLBuildable?]()) { partialResult, array in
+	public static func buildArray(_ components: [[URLComponentsModifier?]]) -> [URLComponentsModifier?] {
+		components.reduce([URLComponentsModifier?]()) { partialResult, array in
 			var new = partialResult
 			new.append(contentsOf: array)
 			return new
 		}
-	}
-
-}
-
-public extension URL {
-
-	static func build(@URLComponentsBuilder block: () -> [URLBuildable?]) -> URL? {
-		var components = URLComponents()
-		components.scheme = "https"
-		let blocks = block().compactMap { $0 }
-		blocks.forEach { $0.modifyURLComponents(&components) }
-		return components.url
-	}
-
-	static func buildThrowing(@URLComponentsBuilder block: () -> [URLBuildable?]) throws -> URL {
-		guard let url = build(block: block) else {
-			throw NSError.urlBuilderFailed
-		}
-		return url
 	}
 
 }

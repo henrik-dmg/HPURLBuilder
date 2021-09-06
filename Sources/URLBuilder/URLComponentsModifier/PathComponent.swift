@@ -1,9 +1,14 @@
 import Foundation
 
-public struct PathComponent: URLBuildable {
+/// A type that modifies the path of a given `URLComponents` instance
+public struct PathComponent: URLComponentsModifier {
 
 	let pathComponent: String
 
+	/// Initialises a new instance of `PathComponent` that will append the specified value
+	/// to the `path` property of `URLComponents`, separated by a slash
+	/// - Parameters:
+	/// 	- path: the desired path
 	public init?(_ pathComponent: String?) {
 		guard let pathComponent = pathComponent else {
 			return nil

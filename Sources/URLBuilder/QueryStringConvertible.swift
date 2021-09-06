@@ -8,15 +8,27 @@ import UIKit
 import AppKit
 #endif
 
+/// A type that can be represented as part of URL query item
 public protocol QueryStringConvertible {
 
-	var queryItemRepresentation: String { get }
+	/// The query item `String` representation of the type
+	var queryItemRepresentation: String? { get }
 
 }
 
 public extension LosslessStringConvertible {
 
-	var queryItemRepresentation: String { description }
+	/// The query item `String` representation of the type
+	var queryItemRepresentation: String? { description }
+
+}
+
+public extension RawRepresentable where RawValue == QueryStringConvertible {
+
+	/// The query item `String` representation of the type
+	var queryItemRepresentation: String? {
+		rawValue.queryItemRepresentation
+	}
 
 }
 
@@ -37,7 +49,7 @@ extension Float: QueryStringConvertible {}
 
 extension CGFloat: QueryStringConvertible {
 
-	public var queryItemRepresentation: String {
+	public var queryItemRepresentation: String? {
 		native.queryItemRepresentation
 	}
 
@@ -45,8 +57,20 @@ extension CGFloat: QueryStringConvertible {
 
 extension URL: QueryStringConvertible {
 
-	public var queryItemRepresentation: String {
+	public var queryItemRepresentation: String? {
 		absoluteString
+	}
+
+}
+
+extension Array: QueryStringConvertible where Element == QueryStringConvertible {
+
+	public var queryItemRepresentation: String? {
+		guard !isEmpty else {
+			return nil
+		}
+		let mappedValues = compactMap { $0.queryItemRepresentation }
+		return mappedValues.joined(separator: ",").nilIfEmpty()
 	}
 
 }
