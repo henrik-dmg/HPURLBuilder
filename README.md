@@ -10,7 +10,7 @@ Either add `.package(url: "https://github.com/henrik-dmg/URLBuilder", from: "1.0
 
 ### CocoaPods
 
-TODO
+Add `pod 'URLBuilder` to your `Podfile` and run `pod install`
 
 ## Usage
 
