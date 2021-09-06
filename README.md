@@ -18,17 +18,17 @@ TODO
 
 ```swift
 let constructedURL: URL = try URL.buildThrowing {
-	Host("panhans.dev")
-	Path("opensource/urlbuilder/index.html")
+    Host("panhans.dev")
+    Path("opensource/urlbuilder/index.html")
 }
 
 let anotherURL: URL? = URL.build {
-	Host("panhans.dev")
-	PathComponent("opensource")
-	PathComponent("urlbuilder")
-	if someConditionIsTrue {
-		QueryItem(name: "focus-search", value: true)
-	}
+    Host("panhans.dev")
+    PathComponent("opensource")
+    PathComponent("urlbuilder")
+    if someConditionIsTrue {
+        QueryItem(name: "focus-search", value: true)
+    }
 }
 ```
 
@@ -64,8 +64,8 @@ Let's say we want to add some filters to a imaginary search query. We could defi
 
 ```swift
 struct SearchFilter {
-	let name: String
-	let value: String
+    let name: String
+    let value: String
 }
 ```
 
@@ -75,9 +75,9 @@ We can then use an array of such filters with `ForEach` like this:
 let filtersToApply = [SearchFilter(name: "location", value: "Berlin", SearchFilter(name: "radius", value: "10")]
 
 URL.build {
-	ForEach(filtersToApply) { filter in
-		QueryItem(name: filter.name, value: filter.value)
-	}
+    ForEach(filtersToApply) { filter in
+        QueryItem(name: filter.name, value: filter.value)
+    }
 }
 
 ```
