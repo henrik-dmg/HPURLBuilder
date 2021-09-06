@@ -32,33 +32,33 @@ let anotherURL: URL? = URL.build {
 }
 ```
 
-The following `URLComponentsModifier` types are available:
+### URLComponentsModifier
 
-### Scheme
+#### Scheme
 
 Modifies the `scheme` property of `URLComponents`
 
-### Host
+#### Host
 
 Modifies the `host` property of `URLComponents`
 
-### Path
+#### Path
 
 Modifies the `path` property of `URLComponents`
 
-### PathComponent
+#### PathComponent
 
 Appends its value to the `path` property of `URLComponents`, separated by a `/`
 
-### QueryItem
+#### QueryItem
 
 Appends or modifies a query item in the `queryItems` property of `URLComponents`
 
-### ForEach
+#### ForEach
 
 Can be used to provide modifiers for a collection of data
 
-#### Example
+##### Example
 
 Let's say we want to add some filters to a imaginary search query. We could define a rudimentary filter type like this:
 
