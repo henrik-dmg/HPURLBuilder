@@ -8,27 +8,27 @@ import UIKit
 import AppKit
 #endif
 
-/// A type that can be represented as part of URL query item
+/// A type that can be represented as part of URL query item.
 public protocol QueryStringConvertible {
 
-	/// The query item `String` representation of the type
-	var queryItemRepresentation: String? { get }
+    /// The query item `String` representation of the type.
+    var queryItemRepresentation: String? { get }
 
 }
 
-public extension LosslessStringConvertible {
+extension LosslessStringConvertible {
 
-	/// The query item `String` representation of the type
-	var queryItemRepresentation: String? { description }
+    /// The query item `String` representation of the type.
+    public var queryItemRepresentation: String? { description }
 
 }
 
-public extension RawRepresentable where RawValue == QueryStringConvertible {
+extension RawRepresentable where RawValue == QueryStringConvertible {
 
-	/// The query item `String` representation of the type
-	var queryItemRepresentation: String? {
-		rawValue.queryItemRepresentation
-	}
+    /// The query item `String` representation of the type.
+    public var queryItemRepresentation: String? {
+        rawValue.queryItemRepresentation
+    }
 
 }
 
@@ -49,28 +49,28 @@ extension Float: QueryStringConvertible {}
 
 extension CGFloat: QueryStringConvertible {
 
-	public var queryItemRepresentation: String? {
-		native.queryItemRepresentation
-	}
+    public var queryItemRepresentation: String? {
+        native.queryItemRepresentation
+    }
 
 }
 
 extension URL: QueryStringConvertible {
 
-	public var queryItemRepresentation: String? {
-		absoluteString
-	}
+    public var queryItemRepresentation: String? {
+        absoluteString
+    }
 
 }
 
 extension Array: QueryStringConvertible where Element == QueryStringConvertible {
 
-	public var queryItemRepresentation: String? {
-		guard !isEmpty else {
-			return nil
-		}
-		let mappedValues = compactMap { $0.queryItemRepresentation }
-		return mappedValues.joined(separator: ",").nilIfEmpty()
-	}
+    public var queryItemRepresentation: String? {
+        guard !isEmpty else {
+            return nil
+        }
+        let mappedValues = compactMap { $0.queryItemRepresentation }
+        return mappedValues.joined(separator: ",").nilIfEmpty()
+    }
 
 }
